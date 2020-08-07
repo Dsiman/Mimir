@@ -1,0 +1,23 @@
+{
+  "name": "mimir",
+  "version": "0.3.0",
+  "description": "Bespoke Bot for my bois in the Discord",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ascii-table": "0.0.9",
+    "discord.js": "^11.5.1",
+    "google-spreadsheet": "^3.0.11",
+    "googleapis": "^39.2.0",
+    "mongoose": "^5.7.11",
+    "node-opus": "^0.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
