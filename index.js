@@ -3,6 +3,8 @@ const fs = require('fs');
 const ascii = require("ascii-table");
 const client = new Client();
 
+
+
 // Collections
 client.commands = new Collection();
 client.functions = new Collection();

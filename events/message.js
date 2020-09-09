@@ -4,7 +4,7 @@ module.exports = async (client, message) => {
     if (message.author.bot) return;
     
     try {
-        await client.functions.get('updatedatabase')(client, message.member)
+        await client.functions.get('profiles')(message.member, 'Update', client)
     } catch (error) { console.error(error) }
     
     if (message.content.indexOf(prefix) !== 0) return;

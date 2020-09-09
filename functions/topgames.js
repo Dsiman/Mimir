@@ -18,7 +18,7 @@ module.exports = async (client, oldMember, newMember) => {
     console.log(new Date().toISOString().match(/(\d{2}:){2}\d{2}/)[0])
     
     // Get the top games for our guild
-    const topgames = await client.functions.get('findtopgamesforguild')()
+    const topgames = await client.functions.get('updategames')(client, 'top')
     
     try {
             // If there is nothing returned from the database then return
@@ -33,10 +33,10 @@ module.exports = async (client, oldMember, newMember) => {
                 await client.guilds.get(client.config.guildid).channels.map(channel => {if (channel.id == channels[i]) voicechannel = channel});
 
                 // Time to Days Hours Mins
-                var time = await client.functions.get('fancytimeformat')(topgames[i].total, 'Short')
+                var time = await client.functions.get('fancytimeformat')(topgames[i].time, 'Short')
 
                 // Update name of game for special cases
-                switch (topgames[i]._id) {
+                switch (topgames[i].game) {
                     case 'Halo: The Master Chief Collection' :
                         var name = 'Halo: MCC'
                         break;
@@ -46,7 +46,10 @@ module.exports = async (client, oldMember, newMember) => {
                     case 'Lethal League Blaze' :
                         var name = 'LL: Blaze'
                         break;
-                    default: var name = topgames[i]._id
+                    case "Garry's Mod" :
+                        var name = 'Stan: Surfing'
+                        break;
+                    default: var name = topgames[i].game
                 }
                 
                 // Set name and time for game

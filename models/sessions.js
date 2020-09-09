@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const sessionSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    to: String,
-    for: String,
-    date: Number,
-    ended: Date,
-    guilds: []
+	game: { type: String, index: true },
+	userID: { type: String, index: true },
+	start: Date,
+	end: Date,
+    ended: { type: String, index: true }
 });
+
 
 module.exports = mongoose.model('Sessions', sessionSchema);
 

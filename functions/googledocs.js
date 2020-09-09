@@ -2,8 +2,8 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 module.exports = async (client, oldMember, newMember) => { 
     const keys = client.config.googlekeys
-    const doc = new GoogleSpreadsheet(client.config.googlesheet);
-    
+    const doc = new GoogleSpreadsheet(client.config.googlsheet);
+    console.log(client.config.googlesheet)
     // Google auth and load
     await doc.useServiceAccountAuth({
         client_email: keys.client_email,
@@ -20,8 +20,7 @@ module.exports = async (client, oldMember, newMember) => {
     })
     
     // Get info for games
-    const nice = await client.findTopGamesForGuild()
-    
+    const nice = await client.functions.get('findtopgamesforguild')()
     // Make new sheet named the date
     const newSheet = await doc.addSheet({
         title: `${today}`,
@@ -35,10 +34,10 @@ module.exports = async (client, oldMember, newMember) => {
         var game = { Game: "", Time: "", Minutes: ""}
         
         // Gametime in a nice format
-        game.Time = await fancyTimeFormat(nice[i].total, 'Full')
+        game.Time = await client.functions.get('fancytimeformat')(nice[i].total, 'Full')
         
         // Gametime in total Hours
-        game.Minutes = await fancyTimeFormat(nice[i].total)
+        game.Minutes = await client.functions.get('fancytimeformat')(nice[i].total)
         
         // Dont add games with less than 20 mins
         if (game.Minutes < 20) { break }
